@@ -25,7 +25,7 @@ object MathExpScanner extends JavaTokenParsers {
     case _ ~ n => VARIABLE(n)
   }
 
-  def function: Parser[FUNCTION] = ident ^^ (n => FUNCTION(n))
+  def function: Parser[FUNC_NAME] = ident ^^ (n => FUNC_NAME(n))
 
   def tokens: Parser[List[MathExpToken]] = {
     phrase(rep1(add | multiply | divide |

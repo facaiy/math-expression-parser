@@ -20,4 +20,4 @@ case class INTEGER(value: Int) extends MathExpToken
 case class FLOAT(value: Double) extends MathExpToken
 
 case class VARIABLE(name: String) extends MathExpToken
-case class FUNCTION(name: String) extends MathExpToken
+case class FUNC_NAME(name: String) extends MathExpToken

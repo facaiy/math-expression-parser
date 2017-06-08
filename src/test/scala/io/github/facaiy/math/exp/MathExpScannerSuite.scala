@@ -61,7 +61,7 @@ class MathExpScannerSuite extends FunSpec {
         MathExpScanner(expression) ===
         Right(
           List(FLOAT(1.0), ADD, INTEGER(2), MULTIPLY, VARIABLE("data"), MINUS,
-            FUNCTION("power"), LEFT_PARENTHESIS, INTEGER(2), COMMA, INTEGER(10), RIGHT_PARENTHESIS,
+            FUNC_NAME("power"), LEFT_PARENTHESIS, INTEGER(2), COMMA, INTEGER(10), RIGHT_PARENTHESIS,
             DIVIDE, FLOAT(4.0))))
     }
   }
