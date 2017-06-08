@@ -16,8 +16,10 @@ case object COMMA extends Delimiter
 case object LEFT_PARENTHESIS extends Delimiter
 case object RIGHT_PARENTHESIS extends Delimiter
 
-case class INTEGER(value: Int) extends MathExpToken
-case class FLOAT(value: Double) extends MathExpToken
+sealed trait Value extends MathExpToken
+case class INTEGER(value: Int) extends Value
+case class FLOAT(value: Double) extends Value
 
-case class VARIABLE(name: String) extends MathExpToken
+case class VAR_NAME(name: String) extends MathExpToken
+
 case class FUNC_NAME(name: String) extends MathExpToken

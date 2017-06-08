@@ -21,8 +21,8 @@ object MathExpScanner extends JavaTokenParsers {
 
   def float: Parser[FLOAT] = """-?(\d+\.(\d*)?|\d*\.\d+)""".r ^^ (x => FLOAT(x.toDouble))
 
-  def variable: Parser[VARIABLE] = "$" ~ ident ^^ {
-    case _ ~ n => VARIABLE(n)
+  def variable: Parser[VAR_NAME] = "$" ~ ident ^^ {
+    case _ ~ n => VAR_NAME(n)
   }
 
   def function: Parser[FUNC_NAME] = ident ^^ (n => FUNC_NAME(n))

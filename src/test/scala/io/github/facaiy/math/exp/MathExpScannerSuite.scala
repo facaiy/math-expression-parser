@@ -48,7 +48,7 @@ class MathExpScannerSuite extends FunSpec {
     it("variable") {
       val p = parse(MathExpScanner.variable) _
 
-      assert(p("$hello") === Right(VARIABLE("hello")))
+      assert(p("$hello") === Right(VAR_NAME("hello")))
       assert(p("hello").isLeft)
       assert(p("$1hello").isLeft)
     }
@@ -60,7 +60,7 @@ class MathExpScannerSuite extends FunSpec {
       assert(
         MathExpScanner(expression) ===
         Right(
-          List(FLOAT(1.0), ADD, INTEGER(2), MULTIPLY, VARIABLE("data"), MINUS,
+          List(FLOAT(1.0), ADD, INTEGER(2), MULTIPLY, VAR_NAME("data"), MINUS,
             FUNC_NAME("power"), LEFT_PARENTHESIS, INTEGER(2), COMMA, INTEGER(10), RIGHT_PARENTHESIS,
             DIVIDE, FLOAT(4.0))))
     }
