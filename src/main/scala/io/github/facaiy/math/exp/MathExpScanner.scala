@@ -6,7 +6,7 @@ import scala.util.parsing.combinator.JavaTokenParsers
 /**
  * Created by facai on 6/6/17.
  */
-object MathExpLexer extends JavaTokenParsers {
+object MathExpScanner extends JavaTokenParsers {
   def add: Parser[Operator] = "+" ^^ (_ => ADD)
   def minus: Parser[Operator] = "-" ^^ (_ => MINUS)
   def multiply: Parser[Operator] = "*" ^^ (_ => MULTIPLY)
@@ -16,19 +16,26 @@ object MathExpLexer extends JavaTokenParsers {
   def leftParenthesis: Parser[Delimiter] = "(" ^^ (_ => LEFT_PARENTHESIS)
   def rightParenthesis: Parser[Delimiter] = ")" ^^ (_ => RIGHT_PARENTHESIS)
 
-  def integer: Parser[INTEGER] = wholeNumber ^^ (x => INTEGER(x.toInt))
-  def float: Parser[FLOAT] = floatingPointNumber ^^ (x => FLOAT(x.toDouble))
+  def integer: Parser[INTEGER] = """-?\d+""".r ^^ (x => INTEGER(x.toInt))
 
-  def variable: Parser[VARIABLE] = "$" ~ stringLiteral ^^ {
-    case _ ~ x => VARIABLE(x)
+  def float: Parser[FLOAT] = """-?(\d+\.(\d*)?|\d*\.\d+)""".r ^^ (x => FLOAT(x.toDouble))
+
+  def variable: Parser[VARIABLE] = "$" ~ ident ^^ {
+    case _ ~ n => VARIABLE(n)
   }
 
-  def function: Parser[FUNCTION] = stringLiteral ^^ {n => FUNCTION(n)}
+  def function: Parser[FUNCTION] = ident ^^ (n => FUNCTION(n))
 
   def tokens: Parser[List[MathExpToken]] = {
     phrase(rep1(add | minus | multiply | divide |
                 comma | leftParenthesis | rightParenthesis |
-                integer | float |
+                float | integer |
                 variable | function))
   }
+
+  def apply(expression: String): Either[MathExpScannerError, List[MathExpToken]] =
+    parse(tokens, expression) match {
+      case NoSuccess(msg, next) => Left(MathExpScannerError(msg))
+      case Success(result, next) => Right(result)
+    }
 }
