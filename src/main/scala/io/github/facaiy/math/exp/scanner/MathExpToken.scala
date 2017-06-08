@@ -1,4 +1,4 @@
-package io.github.facaiy.math.exp
+package io.github.facaiy.math.exp.scanner
 
 /**
  * Created by facai on 6/7/17.

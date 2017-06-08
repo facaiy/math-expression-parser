@@ -1,5 +1,6 @@
-package io.github.facaiy.math.exp
+package io.github.facaiy.math.exp.scanner
 
+import io.github.facaiy.math.exp._
 import scala.util.parsing.combinator.JavaTokenParsers
 
 
@@ -27,9 +28,10 @@ object MathExpScanner extends JavaTokenParsers {
   def function: Parser[FUNCTION] = ident ^^ (n => FUNCTION(n))
 
   def tokens: Parser[List[MathExpToken]] = {
-    phrase(rep1(add | minus | multiply | divide |
+    phrase(rep1(add | multiply | divide |
                 comma | leftParenthesis | rightParenthesis |
                 float | integer |
+                minus |                   // 负号与减号冲突
                 variable | function))
   }
 
