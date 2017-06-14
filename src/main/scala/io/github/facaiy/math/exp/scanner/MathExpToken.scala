@@ -6,19 +6,40 @@ package io.github.facaiy.math.exp.scanner
 sealed trait MathExpToken
 
 sealed trait Operator extends MathExpToken
-case object ADD extends Operator
-case object MINUS extends Operator
-case object MULTIPLY extends Operator
-case object DIVIDE extends Operator
+case object ADD extends Operator {
+  override def toString: String = "+"
+}
+case object MINUS extends Operator {
+  override def toString: String = "-"
+}
+case object MULTIPLY extends Operator {
+  override def toString: String = "*"
+}
+case object DIVIDE extends Operator {
+  override def toString: String = "/"
+}
+case object POWER extends Operator {
+  override def toString: String = "^"
+}
 
 sealed trait Delimiter extends Operator
-case object COMMA extends Delimiter
-case object LEFT_PARENTHESIS extends Delimiter
-case object RIGHT_PARENTHESIS extends Delimiter
+case object COMMA extends Delimiter {
+  override def toString: String = ","
+}
+case object LEFT_PARENTHESIS extends Delimiter {
+  override def toString: String = "("
+}
+case object RIGHT_PARENTHESIS extends Delimiter {
+  override def toString: String = ")"
+}
 
 sealed trait Value extends MathExpToken
-case class INTEGER(value: Int) extends Value
-case class FLOAT(value: Double) extends Value
+case class INTEGER(value: Int) extends Value {
+  override def toString: String = value.toString
+}
+case class FLOAT(value: Double) extends Value {
+  override def toString: String = value.toString
+}
 
 case class VAR_NAME(name: String) extends MathExpToken
 

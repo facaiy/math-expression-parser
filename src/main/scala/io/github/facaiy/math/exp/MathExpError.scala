@@ -6,3 +6,5 @@ package io.github.facaiy.math.exp
 sealed trait MathExpError
 
 case class MathExpScannerError(msg: String) extends MathExpError
+
+case class MathExpParserError(msg: String) extends MathExpError
