@@ -19,9 +19,7 @@ object MathExpScanner extends JavaTokenParsers {
   def leftParenthesis: Parser[Delimiter] = LEFT_PARENTHESIS.toString ^^ (_ => LEFT_PARENTHESIS)
   def rightParenthesis: Parser[Delimiter] = RIGHT_PARENTHESIS.toString ^^ (_ => RIGHT_PARENTHESIS)
 
-  def integer: Parser[INTEGER] = """-?\d+""".r ^^ (x => INTEGER(x.toInt))
-
-  def float: Parser[FLOAT] = """-?(\d+\.(\d*)?|\d*\.\d+)""".r ^^ (x => FLOAT(x.toDouble))
+  def number: Parser[NUMBER] = floatingPointNumber ^^ (x => NUMBER(x.toDouble))
 
   def variable: Parser[VAR_NAME] = "$" ~ ident ^^ {
     case _ ~ n => VAR_NAME(n)
@@ -32,7 +30,7 @@ object MathExpScanner extends JavaTokenParsers {
   def tokens: Parser[List[MathExpToken]] = {
     phrase(rep1(add | power | multiply | divide |
                 comma | leftParenthesis | rightParenthesis |
-                float | integer |
+                number |
                 minus |                   // 负号与减号冲突
                 variable | function))
   }

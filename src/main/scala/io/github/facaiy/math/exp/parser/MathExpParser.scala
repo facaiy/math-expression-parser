@@ -21,8 +21,7 @@ object MathExpParser extends Parsers {
   }
 
   def constant: Parser[MathExpAST] = accept("constant", {
-    case x: INTEGER => Constant(x.value)
-    case x: FLOAT => Constant(x.value)
+    case x: NUMBER => Constant(x.value)
   })
 
   def variable: Parser[Variable] = accept("value", {

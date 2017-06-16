@@ -34,10 +34,7 @@ case object RIGHT_PARENTHESIS extends Delimiter {
 }
 
 sealed trait Value extends MathExpToken
-case class INTEGER(value: Int) extends Value {
-  override def toString: String = value.toString
-}
-case class FLOAT(value: Double) extends Value {
+case class NUMBER(value: Double) extends Value {
   override def toString: String = value.toString
 }
 

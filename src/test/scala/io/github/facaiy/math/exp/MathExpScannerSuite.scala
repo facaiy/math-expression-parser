@@ -18,30 +18,24 @@ class MathExpScannerSuite extends FunSpec {
       }
     }
 
-    it("integer") {
-      val p = parse(MathExpScanner.integer) _
-
-      assert(p("1") === Right(INTEGER(1)))
-      assert(p("0") === Right(INTEGER(0)))
-      assert(p("-1") === Right(INTEGER(-1)))
-      assert(p("10") === Right(INTEGER(10)))
-
-      assert(p("+1").isLeft)
-      assert(p("+1.0").isLeft)
-      assert(p("1.0") === Right(INTEGER(1)))
-      assert(p("-1.0") === Right(INTEGER(-1)))
-    }
-
     it("float") {
-      val p = parse(MathExpScanner.float) _
+      val p = parse(MathExpScanner.number) _
 
-      assert(p(".1") === Right(FLOAT(0.1)))
-      assert(p("1.") === Right(FLOAT(1.0)))
-      assert(p("1.0") === Right(FLOAT(1.0)))
-      assert(p("-1.0") === Right(FLOAT(-1.0)))
-      assert(p("1.02") === Right(FLOAT(1.02)))
+      // Float
+      assert(p(".1") === Right(NUMBER(0.1)))
+      assert(p("1.") === Right(NUMBER(1)))
+      assert(p("1f") === Right(NUMBER(1)))
+      assert(p("1.0") === Right(NUMBER(1)))
+      assert(p("-1.0") === Right(NUMBER(-1.0)))
+      assert(p("1.02") === Right(NUMBER(1.02)))
 
-      assert(p("1").isLeft)
+      // Int
+      assert(p("1") === Right(NUMBER(1)))
+
+      // Long
+      assert(p("1L") === Right(NUMBER(1)))
+
+      // Invaild
       assert(p("+1.0").isLeft)
     }
 
@@ -60,9 +54,9 @@ class MathExpScannerSuite extends FunSpec {
       assert(
         MathExpScanner(expression) ===
         Right(
-          List(FLOAT(1.0), ADD, INTEGER(2), MULTIPLY, VAR_NAME("data"), MINUS,
-            FUNC_NAME("power"), LEFT_PARENTHESIS, INTEGER(2), COMMA, INTEGER(10), RIGHT_PARENTHESIS,
-            DIVIDE, FLOAT(4.0))))
+          List(NUMBER(1), ADD, NUMBER(2), MULTIPLY, VAR_NAME("data"), MINUS,
+               FUNC_NAME("power"), LEFT_PARENTHESIS, NUMBER(2), COMMA, NUMBER(10), RIGHT_PARENTHESIS,
+               DIVIDE, NUMBER(4))))
     }
   }
 }
