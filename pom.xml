@@ -18,6 +18,13 @@
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.scala-lang.modules/scala-parser-combinators_2.11 -->
+        <dependency>
+            <groupId>org.scala-lang.modules</groupId>
+            <artifactId>scala-parser-combinators_2.11</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>org.scalatest</groupId>
