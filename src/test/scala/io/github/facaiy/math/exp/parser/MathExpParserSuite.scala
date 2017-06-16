@@ -9,7 +9,7 @@ import org.scalatest.FunSpec
 class MathExpParserSuite extends FunSpec {
   describe("For math expression") {
     it("parse string to tokens correctly") {
-      val expression = "1.0 + 2 * $data - power(2, 10) / 4."
+      val expression = "1.0 ** 2 + 2 * $data - power(2, 10) / 4."
       // val expression = "1 + 2.2 * 3 ^ 6 - power(2 + 3 * 5, 10) / 4"
       // val expression = "power(2, 10, 3)"
 

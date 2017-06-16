@@ -29,7 +29,7 @@ object MathExpScanner extends JavaTokenParsers {
   def function: Parser[FUNC_NAME] = ident ^^ (n => FUNC_NAME(n))
 
   def tokens: Parser[List[MathExpToken]] = {
-    phrase(rep1(add | multiply | divide | power |
+    phrase(rep1(add | power | multiply | divide |
                 comma | leftParenthesis | rightParenthesis |
                 float | integer |
                 minus |                   // 负号与减号冲突

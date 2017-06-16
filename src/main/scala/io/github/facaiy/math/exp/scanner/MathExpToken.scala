@@ -19,7 +19,7 @@ case object DIVIDE extends Operator {
   override def toString: String = "/"
 }
 case object POWER extends Operator {
-  override def toString: String = "^"
+  override def toString: String = "**"
 }
 
 sealed trait Delimiter extends Operator
