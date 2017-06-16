@@ -18,32 +18,24 @@ object MathExpParser extends Parsers {
     override def rest: Reader[MathExpToken] = new MathExpTokenReader(tokens.tail)
   }
 
-  def constant: Parser[Constant] = accept("constant", {
-    case x: INTEGER => Constant(x)
-    case x: FLOAT => Constant(x)
+  def constant: Parser[MathExpAST] = accept("constant", {
+    case x: INTEGER => Constant(x.value)
+    case x: FLOAT => Constant(x.value)
   })
 
-  /*
   def variable: Parser[Variable] = accept("value", {
-    case x: VAR_NAME => Variable(x)
+    case VAR_NAME(x) => Variable(x)
   })
 
-  def functionName: Parser[FUNC_NAME] = accept("function name", {
-    case f: FUNC_NAME => f
+  def functionName: Parser[MathExpAST] = accept("function name", {
+    case f: FUNC_NAME => Constant(f.name)
   })
 
-  def function2: Parser[Operator2] =
-    functionName ~ LEFT_PARENTHESIS ~ value ~ COMMA ~ value ~ RIGHT_PARENTHESIS ^^ {
-      case FUNC_NAME(n) ~ _ ~ a1 ~ _ ~ a2 ~ _ => Operator2(n, a1, a2)
-    }
-
-  def binaryOpHigh: Parser[Operator2] = value ~ (MULTIPLY | DIVIDE) ~ value ^^ {
-    case x ~ MULTIPLY ~ y => Operator2("*", x, y)
-    case x ~ DIVIDE ~ y => Operator2("/", x, y)
+  def function: Parser[MathExpAST] = functionName ~ (LEFT_PARENTHESIS ~> expression ~ rep(COMMA ~> expression) <~ RIGHT_PARENTHESIS) ^^ {
+    case Constant(n: String) ~ (e ~ es) => OperatorN(n, e :: es)
   }
-  */
 
-  def shortFactor: Parser[MathExpAST] = constant | LEFT_PARENTHESIS ~> expression <~ RIGHT_PARENTHESIS ^^ { case x => x }
+  def shortFactor: Parser[MathExpAST] = constant | variable | function | LEFT_PARENTHESIS ~> expression <~ RIGHT_PARENTHESIS ^^ { case x => x }
 
   def longFactor: Parser[MathExpAST] = shortFactor ~ rep(POWER ~ shortFactor) ^^ {
     case x ~ ls => ls.foldLeft[MathExpAST](x) {
@@ -58,7 +50,7 @@ object MathExpParser extends Parsers {
     }
   }
 
-  def expression: Parser[MathExpAST] = term ~ rep1((ADD | MINUS) ~ term) ^^ {
+  def expression: Parser[MathExpAST] = term ~ rep((ADD | MINUS) ~ term) ^^ {
     case x ~ ls => ls.foldLeft[MathExpAST](x){
       case (d1, ADD ~ d2) => Operator2(ADD.toString, d1, d2)
       case (d1, MINUS ~ d2) => Operator2(MINUS.toString, d1, d2)
