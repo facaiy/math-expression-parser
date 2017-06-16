@@ -7,6 +7,8 @@ import scala.util.parsing.input.{NoPosition, Position, Reader}
 
 /**
  * Created by facai on 6/8/17.
+ *
+ * ref: https://stackoverflow.com/questions/5805496/arithmetic-expression-grammar-and-parser
  */
 object MathExpParser extends Parsers {
   override type Elem = MathExpToken

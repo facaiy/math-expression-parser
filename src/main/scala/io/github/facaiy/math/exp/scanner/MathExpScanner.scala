@@ -6,6 +6,7 @@ import scala.util.parsing.combinator.JavaTokenParsers
 
 /**
  * Created by facai on 6/6/17.
+ *
  */
 object MathExpScanner extends JavaTokenParsers {
   def add: Parser[Operator] = ADD.toString ^^ (_ => ADD)
