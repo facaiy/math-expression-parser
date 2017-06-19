@@ -71,10 +71,9 @@ object MathExpParser extends Parsers {
 }
 
 object WorkflowCompiler {
-  def apply(code: String): Either[MathExpError, MathExpAST] = {
+  def apply(code: String): Either[MathExpError, MathExpAST] =
     for {
       tokens <- MathExpScanner(code).right
       ast <- MathExpParser(tokens).right
     } yield ast
-  }
 }
