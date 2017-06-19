@@ -10,6 +10,7 @@ sealed trait MathExpAST
 case class Constant[+A](get: A) extends MathExpAST {
   override def toString: String = get.toString
 }
+
 case class Variable(name: String) extends MathExpAST
 
 case class Operator2(op: String, v1: MathExpAST, v2: MathExpAST) extends MathExpAST {
