@@ -18,9 +18,9 @@ class ExpressionSuite extends FunSpec {
       tokens match {
         case Right(ts) =>
           val e = toExpression(ts)
-          assert(e.f(Map("a1" -> 0.0, "a2" -> 0)) === 1)
-          assert(e.f(Map("a1" -> 2.0, "a2" -> 1)) === 4)
-          assert(e.f(Map("a1" -> 8.0, "a2" -> 2)) === 9)
+          assert(e.eval(Map("a1" -> 0.0, "a2" -> 0)) === 1)
+          assert(e.eval(Map("a1" -> 2.0, "a2" -> 1)) === 4)
+          assert(e.eval(Map("a1" -> 8.0, "a2" -> 2)) === 9)
       }
     }
   }

@@ -5,11 +5,11 @@ import io.github.facaiy.math.exp.parser._
 /**
  * Created by facai on 6/19/17.
  */
-case class Expression[A, B](f: A => B) {
+case class Expression[A, B](eval: A => B) {
   def map2[C, D](that: Expression[A, C])(g: (B, C) => D): Expression[A, D] =
-    Expression(x => g(this.f(x), that.f(x)))
+    Expression(x => g(this.eval(x), that.eval(x)))
 
-  def map[C](g: B => C): Expression[A, C] = Expression(g compose f)
+  def map[C](g: B => C): Expression[A, C] = Expression(g compose eval)
 }
 
 object Expression {
@@ -49,5 +49,5 @@ object Expression {
 
   def sequence[A, B](ls: List[Expression[A, B]]): Expression[A, List[B]] =
     ls.foldRight(unit[A, List[B]](List.empty))(
-                 (e, acc) => Expression(x => e.f(x) :: acc.f(x)))
+                 (e, acc) => Expression(x => e.eval(x) :: acc.eval(x)))
 }
