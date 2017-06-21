@@ -1,6 +1,6 @@
-package io.github.facaiy.math.exp.generator
+package io.github.facaiy.math.expression
 
-import io.github.facaiy.math.exp.parser._
+import io.github.facaiy.math.expression.compiler.parser._
 
 /**
  * Created by facai on 6/19/17.

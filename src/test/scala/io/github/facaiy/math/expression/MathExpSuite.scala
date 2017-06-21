@@ -1,4 +1,4 @@
-package io.github.facaiy.math.exp
+package io.github.facaiy.math.expression
 
 import org.scalatest.FunSpec
 

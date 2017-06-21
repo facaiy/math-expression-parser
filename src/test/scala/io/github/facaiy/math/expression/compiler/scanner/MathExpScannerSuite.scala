@@ -1,6 +1,6 @@
-package io.github.facaiy.math.exp
+package io.github.facaiy.math.expression.compiler.scanner
 
-import io.github.facaiy.math.exp.scanner._
+import io.github.facaiy.math.expression.MathExpScannerError
 import org.scalatest.FunSpec
 
 /**
@@ -8,7 +8,7 @@ import org.scalatest.FunSpec
  */
 class MathExpScannerSuite extends FunSpec {
   describe("For tokens") {
-    import io.github.facaiy.math.exp.scanner.MathExpScanner._
+    import io.github.facaiy.math.expression.compiler.scanner.MathExpScanner._
 
     def parse(token: Parser[MathExpToken])
              (expression: String): Either[MathExpScannerError, MathExpToken] = {

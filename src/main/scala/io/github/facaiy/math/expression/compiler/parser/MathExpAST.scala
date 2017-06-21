@@ -1,6 +1,4 @@
-package io.github.facaiy.math.exp.parser
-
-import io.github.facaiy.math.exp.scanner.{Value, VAR_NAME}
+package io.github.facaiy.math.expression.compiler.parser
 
 /**
  * Created by facai on 6/8/17.

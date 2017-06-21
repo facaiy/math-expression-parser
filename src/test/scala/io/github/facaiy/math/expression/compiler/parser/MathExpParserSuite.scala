@@ -1,6 +1,7 @@
-package io.github.facaiy.math.exp.parser
+package io.github.facaiy.math.expression.compiler.parser
 
-import io.github.facaiy.math.exp.scanner._
+import io.github.facaiy.math.expression.compiler.MathExpCompiler
+import io.github.facaiy.math.expression.compiler.scanner._
 import org.scalatest.FunSpec
 
 /**
@@ -11,7 +12,7 @@ class MathExpParserSuite extends FunSpec {
     it("parse string to tokens correctly") {
       val expression = "1.0 ** 2 + 2 * $data - power(2, 10) / 4."
 
-      val tokens = WorkflowCompiler(expression)
+      val tokens = MathExpCompiler(expression)
 
       assert(tokens === Right(
         Operator2("-",

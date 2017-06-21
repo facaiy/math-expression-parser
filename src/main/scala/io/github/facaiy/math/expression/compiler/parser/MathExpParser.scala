@@ -1,7 +1,7 @@
-package io.github.facaiy.math.exp.parser
+package io.github.facaiy.math.expression.compiler.parser
 
-import io.github.facaiy.math.exp.{MathExpError, MathExpParserError}
-import io.github.facaiy.math.exp.scanner._
+import io.github.facaiy.math.expression.MathExpParserError
+import io.github.facaiy.math.expression.compiler.scanner._
 import scala.util.parsing.combinator.Parsers
 import scala.util.parsing.input.{NoPosition, Position, Reader}
 
@@ -70,10 +70,4 @@ object MathExpParser extends Parsers {
   }
 }
 
-object WorkflowCompiler {
-  def apply(code: String): Either[MathExpError, MathExpAST] =
-    for {
-      tokens <- MathExpScanner(code).right
-      ast <- MathExpParser(tokens).right
-    } yield ast
-}
+
