@@ -21,7 +21,7 @@ class MathExpSuite extends FunSpec {
       val str = "1.0 + sqrt( - 2"
 
       assertThrows[IllegalArgumentException] {
-        val ex = MathExp.parse(str)
+        MathExp.parse(str)
       }
     }
   }
