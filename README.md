@@ -15,12 +15,23 @@ features:
 mvn clean install
 ```
 
+1. maven
+   ```
+   <dependency>
+     <groupId>io.github.facaiy</groupId>
+     <artifactId>math-expression-parser</artifactId>
+     <version>0.0.1-SNAPSHOT</version>
+   </dependency>
+   ```
+
 
 ### Usage
 
 A simple example:
 
 ```scala
+import io.github.facaiy.math.expression.MathExp
+
 val str = "1.0 + sqrt(2 * $a1) + $a2 ** 2"
 val ex = MathExp.parse(str)
 
