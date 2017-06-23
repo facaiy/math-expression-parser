@@ -1,7 +1,8 @@
 package io.github.facaiy.math.expression.compiler.scanner
 
-import io.github.facaiy.math.expression.MathExpScannerError
 import org.scalatest.FunSpec
+
+import io.github.facaiy.math.expression.MathExpScannerError
 
 /**
  * Created by facai on 6/8/17.

@@ -1,9 +1,10 @@
 package io.github.facaiy.math.expression.compiler.parser
 
-import io.github.facaiy.math.expression.MathExpParserError
-import io.github.facaiy.math.expression.compiler.scanner._
 import scala.util.parsing.combinator.Parsers
 import scala.util.parsing.input.{NoPosition, Position, Reader}
+
+import io.github.facaiy.math.expression.MathExpParserError
+import io.github.facaiy.math.expression.compiler.scanner._
 
 /**
  * Created by facai on 6/8/17.
@@ -32,11 +33,15 @@ object MathExpParser extends Parsers {
     case f: FUNC_NAME => Constant(f.name)
   })
 
-  def function: Parser[MathExpAST] = functionName ~ (LEFT_PARENTHESIS ~> expression ~ rep(COMMA ~> expression) <~ RIGHT_PARENTHESIS) ^^ {
-    case Constant(n: String) ~ (e ~ es) => OperatorN(n, e :: es)
-  }
+  def function: Parser[MathExpAST] =
+    functionName ~ (
+      LEFT_PARENTHESIS ~> expression ~ rep(COMMA ~> expression) <~ RIGHT_PARENTHESIS) ^^ {
+        case Constant(n: String) ~ (e ~ es) => OperatorN(n, e :: es)
+    }
 
-  def shortFactor: Parser[MathExpAST] = constant | variable | function | LEFT_PARENTHESIS ~> expression <~ RIGHT_PARENTHESIS ^^ { case x => x }
+  def shortFactor: Parser[MathExpAST] =
+    constant | variable | function | LEFT_PARENTHESIS ~> expression <~ RIGHT_PARENTHESIS ^^
+      { case x => x }
 
   def longFactor: Parser[MathExpAST] = shortFactor ~ rep(POWER ~ shortFactor) ^^ {
     case x ~ ls => ls.foldLeft[MathExpAST](x) {
@@ -52,7 +57,7 @@ object MathExpParser extends Parsers {
   }
 
   def expression: Parser[MathExpAST] = term ~ rep((ADD | MINUS) ~ term) ^^ {
-    case x ~ ls => ls.foldLeft[MathExpAST](x){
+    case x ~ ls => ls.foldLeft[MathExpAST](x) {
       case (d1, ADD ~ d2) => Operator2(ADD.toString, d1, d2)
       case (d1, MINUS ~ d2) => Operator2(MINUS.toString, d1, d2)
     }

@@ -1,8 +1,8 @@
 package io.github.facaiy.math.expression.compiler.parser
 
-import io.github.facaiy.math.expression.compiler.MathExpCompiler
-import io.github.facaiy.math.expression.compiler.scanner._
 import org.scalatest.FunSpec
+
+import io.github.facaiy.math.expression.compiler.MathExpCompiler
 
 /**
  * Created by facai on 6/9/17.

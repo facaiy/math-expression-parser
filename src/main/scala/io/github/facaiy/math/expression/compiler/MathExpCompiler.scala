@@ -1,8 +1,8 @@
 package io.github.facaiy.math.expression.compiler
 
-import io.github.facaiy.math.expression.MathExpError
 import io.github.facaiy.math.expression.compiler.parser.{MathExpAST, MathExpParser}
 import io.github.facaiy.math.expression.compiler.scanner.MathExpScanner
+import io.github.facaiy.math.expression.MathExpError
 
 /**
  * Created by facai on 6/21/17.

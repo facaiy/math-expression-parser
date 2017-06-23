@@ -1,8 +1,8 @@
 package io.github.facaiy.math.expression.compiler.scanner
 
-import io.github.facaiy.math.expression._
 import scala.util.parsing.combinator.JavaTokenParsers
 
+import io.github.facaiy.math.expression._
 
 /**
  * Created by facai on 6/6/17.

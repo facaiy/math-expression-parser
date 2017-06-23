@@ -1,4 +1,6 @@
 # math-expression-parser
+[<img src="https://img.shields.io/travis/facaiy/math-expression-parser.svg"/>](https://travis-ci.org/facaiy/math-expression-parser)
+[<img src="https://img.shields.io/maven-central/v/io.github.facaiy/math-expression-parser.svg">](http://search.maven.org/#search|ga|1|g:"io.github.facaiy"%20AND%20a:"math-expression-parser")
 
 A scala library for parsing mathemitical expressions with support for parentheses and variables.
 
@@ -10,10 +12,6 @@ features:
 
 
 ### Install
-
-```bash
-mvn clean install
-```
 
 1. maven
    ```
