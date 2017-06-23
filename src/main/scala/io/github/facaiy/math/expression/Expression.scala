@@ -13,20 +13,7 @@ case class Expression[A, B](eval: A => B) {
 }
 
 object Expression {
-  val function1: Map[String, Double => Double] = Map(
-    "sqrt" -> Math.sqrt,
-    "log" -> Math.log,
-    "log10" -> Math.log10,
-    "log1p" -> Math.log1p,
-    "abs" -> Math.abs
-  )
-
-  val function2: Map[String, (Double, Double) => Double] = Map(
-    "+" -> (_+_),
-    "-" -> (_-_),
-    "*" -> (_*_),
-    "/" -> (_/_),
-    "**" -> ((x, y) => Math.pow(x, y.toInt)))
+  import FunctionRegister._
 
   def toExpression(ast: MathExpAST): Expression[String => Double, Double] = ast match {
     case Constant(d: Double) => Expression(_ => d)
@@ -50,4 +37,61 @@ object Expression {
   def sequence[A, B](ls: List[Expression[A, B]]): Expression[A, List[B]] =
     ls.foldRight(unit[A, List[B]](List.empty))(
                  (e, acc) => Expression(x => e.eval(x) :: acc.eval(x)))
+}
+
+object FunctionRegister {
+  val function1: Map[String, Double => Double] = Map(
+    // scala.math
+    // Rounding
+    "ceil" -> Math.ceil,
+    "floor" -> Math.floor,
+    "rint" -> Math.rint,
+    "round" -> ((x: Double) => Math.round(x)).andThen(_.toDouble),
+    // Exponential and Logarithmic
+    "exp" -> Math.exp,
+    "expm1" -> Math.expm1,
+    "log" -> Math.log,
+    "log10" -> Math.log10,
+    "log1p" -> Math.log1p,
+    // Trigonometric
+    "acos" -> Math.acos,
+    "asin" -> Math.asin,
+    "atan" -> Math.atan,
+    "cos" -> Math.cos,
+    "sin" -> Math.sin,
+    "tan" -> Math.tan,
+    // Angular Measurement Conversion
+    "toDegrees" -> Math.toDegrees,
+    "toRadians" -> Math.toRadians,
+    // Hyperbolic
+    "cosh" -> Math.cosh,
+    "sinh" -> Math.sinh,
+    "tanh" -> Math.tanh,
+    // Absolute Values
+    "abs" -> Math.abs,
+    // Signs
+    "signum" -> Math.signum,
+    // Root Extraction
+    "cbrt" -> Math.cbrt,
+    "sqrt" -> Math.sqrt,
+    // Unit of Least Precision
+    "ulp" -> Math.ulp
+  )
+
+  val function2: Map[String, (Double, Double) => Double] = Map(
+    "+" -> (_+_),
+    "-" -> (_-_),
+    "*" -> (_*_),
+    "/" -> (_/_),
+    // scala.math
+    // Minimum and Maximum
+    "max" -> Math.max,
+    "min" -> Math.min,
+    // Exponential and Logarithmic
+    "**" -> Math.pow,
+    "pow" -> Math.pow,
+    // Polar Coordinates
+    "atan2" -> Math.atan2,
+    "hypot" -> Math.hypot
+  )
 }
