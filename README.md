@@ -18,7 +18,7 @@ features:
    <dependency>
      <groupId>io.github.facaiy</groupId>
      <artifactId>math-expression-parser</artifactId>
-     <version>0.0.1-SNAPSHOT</version>
+     <version>0.0.1</version>
    </dependency>
    ```
 
