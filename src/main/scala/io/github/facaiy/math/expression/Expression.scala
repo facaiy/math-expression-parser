@@ -79,10 +79,10 @@ object FunctionRegister {
   )
 
   val function2: Map[String, (Double, Double) => Double] = Map(
-    "+" -> (_+_),
-    "-" -> (_-_),
-    "*" -> (_*_),
-    "/" -> (_/_),
+    "+" -> (_ + _),
+    "-" -> (_ - _),
+    "*" -> (_ * _),
+    "/" -> (_ / _),
     // scala.math
     // Minimum and Maximum
     "max" -> Math.max,
