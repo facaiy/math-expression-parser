@@ -5,7 +5,7 @@ A scala library for parsing mathemitical expressions with support for parenthese
 features:
 + math operators: `+`, `-`, `*`, `/`, `**`(power)
 + parentheses `( )` and comma `,`
-+ function: `sqrt`, `log`, `log10`, `log1p`, `abs`
++ all function of [`scala.math`](http://www.scala-lang.org/api/2.12.1/scala/math/index.html), except of `random`, `E` and `PI`
 + variable name: `$` with valid Java variable name
 
 
