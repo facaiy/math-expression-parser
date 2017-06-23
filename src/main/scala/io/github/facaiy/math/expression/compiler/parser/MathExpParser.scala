@@ -1,9 +1,10 @@
 package io.github.facaiy.math.expression.compiler.parser
 
-import io.github.facaiy.math.expression.MathExpParserError
-import io.github.facaiy.math.expression.compiler.scanner._
 import scala.util.parsing.combinator.Parsers
 import scala.util.parsing.input.{NoPosition, Position, Reader}
+
+import io.github.facaiy.math.expression.MathExpParserError
+import io.github.facaiy.math.expression.compiler.scanner._
 
 /**
  * Created by facai on 6/8/17.
