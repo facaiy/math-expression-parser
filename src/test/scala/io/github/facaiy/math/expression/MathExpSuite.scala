@@ -17,6 +17,15 @@ class MathExpSuite extends FunSpec {
       assert(ex.eval(Map("a1" -> 8.0, "a2" -> 2)) === 9)
     }
 
+    it("valid string - two arguments operation") {
+      val str = "pow($a1, $a2)"
+
+      val ex = MathExp.parse(str)
+
+      assert(ex.eval(Map("a1" -> 2, "a2" -> 0)) === 1)
+      assert(ex.eval(Map("a1" -> 2, "a2" -> 10)) === 1024)
+    }
+
     it("invalid string") {
       val str = "1.0 + sqrt( - 2"
 
