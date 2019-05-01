@@ -26,7 +26,7 @@ object Expression {
       args.map{ xs: Array[Double] =>
         xs.size match {
           case 1 => function1(op)(xs.head)
-          case 2 => function2(op)(xs.head, xs(2))
+          case 2 => function2(op)(xs.head, xs(1))
           case _ => throw new UnsupportedOperationException(f.toString)
         }
       }
