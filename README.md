@@ -40,3 +40,11 @@ val output = ex.eval(variables)
 val output1 = ex.eval(Map("a1" -> 8.0, "a2" -> 2))
 // output1 = 9.0
 ```
+
+### Release
+
+```bash
+# Ref: https://central.sonatype.org/pages/apache-maven.html
+mvn release:clean release:prepare
+mvn release:perform
+```

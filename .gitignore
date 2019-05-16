@@ -28,6 +28,7 @@ project/plugins/project/
 # pom
 *.iml
 *.properties
+*.releaseBackup
 
 # hidden file
 .*
